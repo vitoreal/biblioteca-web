@@ -4,9 +4,11 @@ import './assets/dashboard.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faBook, faPerson, faList, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faPerson, faList, faHouse, faFileImport } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBook, faPerson, faList, faHouse);
+library.add(faBook, faPerson, faList, faHouse, faFileImport);
+
+
 
 import BaseLayout from './components/base/BaseLayout.vue';
 import HeaderLayout from './components/base/HeaderLayout.vue';
