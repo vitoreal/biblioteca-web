@@ -3,28 +3,28 @@
     <div class="position-sticky pt-3">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <font-awesome-icon icon="house" size="xl" />
+          <RouterLink to="/" class="nav-link active" aria-current="page" >
+            <font-awesome-icon icon="house" size="lg" />
             Home
-          </a>
+          </RouterLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <font-awesome-icon icon="book" size="xl" />
+          <RouterLink to="/livros" class="nav-link" aria-current="page" >
+            <font-awesome-icon icon="book" size="lg" />
             Livros
-          </a>
+          </RouterLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <RouterLink to="/autor" class="nav-link" aria-current="page" >
             <font-awesome-icon icon="person" size="xl" />
             Autor
-          </a>
+          </RouterLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <font-awesome-icon icon="list" size="xl" />
+          <RouterLink to="/assunto" class="nav-link" aria-current="page" >
+            <font-awesome-icon icon="list" size="lg" />
             Assunto
-          </a>
+          </RouterLink>
         </li>
       </ul>
     </div>
