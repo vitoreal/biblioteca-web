@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css"
 import './assets/dashboard.css'
+import './assets/form-styles.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBook, faPerson, faList, faHouse, faFileImport } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +8,8 @@ import Notifications from '@kyvg/vue3-notification'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Pagination from 'v-pagination-3';
+
+import './axios'; // axios.js - responsavel por setar a url da api
 
 import BaseLayout from './components/base/BaseLayout.vue';
 import HeaderLayout from './components/base/HeaderLayout.vue';

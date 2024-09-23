@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <a href="#" class="btn btn-primary">Cadastrar</a>
+  <div class="row">
+    <div class="mb-4">
+        <router-link to="assunto/cadastrar" class="btn btn-primary float-end">
+          Cadastrar
+        </router-link>
+    </div>
+    
     <div class="card">
       <div class="card-header">
         Assunto
