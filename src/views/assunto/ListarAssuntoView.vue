@@ -16,6 +16,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Descrição</th>
+              
             </tr>
           </thead>
           <tbody v-if="listaAssunto != null && listaAssunto.total > 0">
@@ -26,7 +27,13 @@
           </tbody>
         </table>
         <div v-if="listaAssunto != null && listaAssunto.total > 0">
-          <pagination v-model="page" :records="listaAssunto.total" :per-page="limit" @paginate="myCallback"/>
+          <vue-awesome-paginate
+            :total-items="listaAssunto.total"
+            :items-per-page="limit"
+            :max-pages-shown="5"
+            v-model="currentPage"
+            @click="myCallback"
+          />
         </div> 
       </div>
       
@@ -42,7 +49,7 @@ export default {
   data() {
     return {
         listaAssunto: null,
-        page: 1,
+        currentPage : ref(1),
         limit: 10,
         skip: 0
     }    
@@ -63,7 +70,7 @@ export default {
           this.listaAssunto = toRaw(this.listaAssunto)
         }
 
-        console.log(this.listaAssunto);        
+        console.log(this.listaAssunto.total);        
       }).catch((error) => {
         notify({
           title: 'Mensagem',
@@ -74,7 +81,7 @@ export default {
       });
     },
     myCallback() {
-        this.skip = (this.page*this.limit) - this.limit;
+        this.skip = (this.currentPage*this.limit) - this.limit;
         this.getAssuntos();
     }
   },

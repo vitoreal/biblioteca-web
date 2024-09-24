@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <menu-layout></menu-layout>
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-5">
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-5 mb-5">
         <slot></slot>
       </main>
     </div>

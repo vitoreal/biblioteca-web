@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css"
 import './assets/dashboard.css'
 import './assets/form-styles.css'
-import './assets/notify.scss'
+import './assets/notify-pagination.scss'
 import './assets/loading.css';
 
 import {LoadingPlugin} from 'vue-loading-overlay';
@@ -11,7 +11,8 @@ import { faBook, faPerson, faList, faHouse, faFileImport } from '@fortawesome/fr
 import Notifications from '@kyvg/vue3-notification'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Pagination from 'v-pagination-3';
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
 
 import './axios'; // axios.js - responsavel por setar a url da api
 
@@ -23,7 +24,6 @@ library.add(faBook, faPerson, faList, faHouse, faFileImport);
 
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
@@ -34,13 +34,12 @@ app.component('base-layout', BaseLayout);
 app.component('header-layout', HeaderLayout);
 app.component('menu-layout', MenuLayout);
 app.component('font-awesome-icon', FontAwesomeIcon);
-app.component('pagination', Pagination);
 
-app.use(createPinia())
 app.use(router)
 app.use(Notifications)
 app.use(VueAxios, axios)
 app.use(LoadingPlugin);
+app.use(VueAwesomePaginate);
 
 app.mount('#app')
 import "bootstrap/dist/js/bootstrap.js"
