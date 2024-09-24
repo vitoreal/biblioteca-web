@@ -3,14 +3,14 @@
     
     <form @submit.prevent ref="formLogar" method="post" action="salvar">
       <div class="card">
-        <h5 class="card-header bg-secondary text-white">Editar assunto</h5>
+        <h5 class="card-header bg-secondary text-white">Editar autor</h5>
         <div class="card-body">
 
           <div class="row mb-3">
-            <label for="descricao" class="col-auto col-form-label">Descrição:</label>
+            <label for="nome" class="col-auto col-form-label">Nome:</label>
             <div class="col-sm-4">
-              <input v-model="state.descricao"  type="text" maxlength="20" class="form-control" id="descricao">
-              <label class="error" v-if="v$.descricao.$error">{{ v$.descricao.$errors[0].$message }}</label>
+              <input v-model="state.nome"  type="text" maxlength="20" class="form-control" id="nome">
+              <label class="error" v-if="v$.nome.$error">{{ v$.nome.$errors[0].$message }}</label>
             </div>
           </div>
 
@@ -19,7 +19,7 @@
 
       <div class="mt-4">
           <button type="submit" @click="submitForm" class="btn btn-primary float-end">salvar</button>
-          <a href="/assunto" type="button" class="btn btn-info float-end me-2">Voltar</a>
+          <a href="/autor" type="button" class="btn btn-info float-end me-2">Voltar</a>
       </div>
   </form>
   </div>
@@ -35,14 +35,14 @@ export default {
   name: "EditarAssuntoView",
   setup() {
     const state = reactive({
-      descricao: "",
+      nome: "",
     })
 
    // const router = 
     const rules = computed(() => {
       return { 
-        descricao: {
-            required: helpers.withMessage("Campo descrição é obrigatório!", required),
+        nome: {
+            required: helpers.withMessage("Campo nome é obrigatório!", required),
         },
       };
     })
@@ -58,7 +58,7 @@ export default {
   },
   validations() {
     return {
-      descricao: { 
+      nome: { 
         required
       },
     };
@@ -72,9 +72,9 @@ export default {
 
         const loader = this.$loading.show();
         
-        const response = await this.axios.post('/assunto/salvar', {
+        const response = await this.axios.post('/autor/salvar', {
           id: this.$route.params.id,
-          descricao: this.state.descricao,
+          nome: this.state.nome,
         })
         .then(function (response) {
           loader.hide();
@@ -87,7 +87,7 @@ export default {
               duration: 10000,
             })
             
-            router.push({ path: '/assunto' })
+            router.push({ path: '/autor' })
           } else {
             notify({
               title: 'Mensagem',
@@ -118,11 +118,11 @@ export default {
     async getDado(){
 
       const loader = this.$loading.show();
-      const urlFetch = 'assunto/buscar/'+this.$route.params.id;
+      const urlFetch = 'autor/buscar/'+this.$route.params.id;
 
       await this.axios.get(urlFetch).then(res => {
         loader.hide();
-        this.state.descricao = res.data.result.descricao;
+        this.state.nome = res.data.result.nome;
       }).catch((error) => {
         console.log(error)
         notify({

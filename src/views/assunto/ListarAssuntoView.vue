@@ -34,7 +34,7 @@
               </td>
             </tr>
           </tbody>
-          <tbody v-if="listaTodos.total == 0">
+          <tbody v-if="listaTodos == null || listaTodos.total == 0">
             <tr>
               <td class="alinhaCenter" colspan="3">
                 Nenhum resultado encontrado!

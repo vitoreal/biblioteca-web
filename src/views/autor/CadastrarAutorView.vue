@@ -19,7 +19,7 @@
 
       <div class="mt-4">
           <button type="submit" @click="submitForm" class="btn btn-primary float-end">salvar</button>
-          <a href="/assunto" type="button" class="btn btn-info float-end me-2">Voltar</a>
+          <a href="/autor" type="button" class="btn btn-info float-end me-2">Voltar</a>
       </div>
   </form>
   </div>

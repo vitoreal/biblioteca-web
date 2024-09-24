@@ -34,10 +34,10 @@
               </td>
             </tr>
           </tbody>
-          <tbody v-if="listaTodos.total == 0">
+          <tbody v-if="listaTodos == null || listaTodos.total == 0">
             <tr>
               <td class="alinhaCenter" colspan="3">
-                <b>Nenhum resultado encontrado!</b>
+                Nenhum resultado encontrado!
               </td>
             </tr>
           </tbody>
@@ -86,7 +86,7 @@ export default {
         if (isProxy(this.listaTodos)){
           this.listaTodos = toRaw(this.listaTodos)
         }
-
+        
       }).catch((error) => {
         notify({
           title: 'Mensagem',
@@ -128,7 +128,6 @@ export default {
           
         })
         .catch(function (error) {
-          console.log(error);
           loader.hide();
           if(error.response.data.type == 'ERROR'){
               notify({
