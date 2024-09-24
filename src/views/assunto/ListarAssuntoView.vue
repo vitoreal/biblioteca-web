@@ -79,7 +79,6 @@ export default {
           this.listaAssunto = toRaw(this.listaAssunto)
         }
 
-        console.log(this.listaAssunto.total);        
       }).catch((error) => {
         notify({
           title: 'Mensagem',
@@ -104,11 +103,14 @@ export default {
 
       const loader = this.$loading.show();
       const response = await this.axios.post('/assunto/excluir', {
-          id: this.$param.id,
+         id: id,
         })
         .then(function (response) {
           loader.hide();
           if(response.data.type == 'SUCESSO'){
+
+            this.myCallback();
+
             notify({
               title: 'Mensagem',
               text: response.data.mensagem,
@@ -117,7 +119,6 @@ export default {
               duration: 10000,
             })
             
-            router.push({ path: '/assunto' })
           }
           
         })

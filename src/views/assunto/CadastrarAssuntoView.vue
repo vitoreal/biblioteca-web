@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     
-    <form @submit.prevent="submitForm" ref="formLogar" method="post" action="salvar">
+    <form @submit.prevent ref="formLogar" method="post" action="salvar">
       <div class="card">
         <h5 class="card-header bg-secondary text-white">Cadastrar assunto</h5>
         <div class="card-body">
@@ -87,6 +87,13 @@ export default {
             })
             
             router.push({ path: '/assunto' })
+          } else {
+            notify({
+              title: 'Mensagem',
+              text: response.data.mensagem,
+              type: 'warn',
+              position: 'top right',
+            })
           }
           
         })

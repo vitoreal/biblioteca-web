@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     
-    <form @submit.prevent="submitForm" ref="formLogar" method="post" action="salvar">
+    <form @submit.prevent ref="formLogar" method="post" action="salvar">
       <div class="card">
         <h5 class="card-header bg-secondary text-white">Editar assunto</h5>
         <div class="card-body">
@@ -73,7 +73,7 @@ export default {
         const loader = this.$loading.show();
         
         const response = await this.axios.post('/assunto/salvar', {
-          id: this.$param.id,
+          id: this.$route.params.id,
           descricao: this.state.descricao,
         })
         .then(function (response) {
@@ -88,17 +88,24 @@ export default {
             })
             
             router.push({ path: '/assunto' })
+          } else {
+            notify({
+              title: 'Mensagem',
+              text: response.data.mensagem,
+              type: 'warn',
+              position: 'top right',
+            })
           }
           
         })
         .catch(function (error) {
           console.log(error);
           loader.hide();
-          if(error.response.data.type == 'ERROR'){
+          if(error.response.data.type != 'SUCESSO'){
               notify({
               title: 'Mensagem',
               text: response.data.mensagem,
-              type: 'error',
+              type: 'warn',
               position: 'top right',
             })
 
