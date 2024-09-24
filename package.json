@@ -24,6 +24,7 @@
     "v-pagination-3": "^0.1.7",
     "vue": "^3.4.29",
     "vue-axios": "^3.5.2",
+    "vue-loading-overlay": "6.0",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
     "prettier": "^3.2.5",
+    "sass-embedded": "^1.79.3",
     "vite": "^5.3.1"
   }
 }

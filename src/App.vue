@@ -3,8 +3,8 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <notifications />
   <base-layout>
+  <notifications />
   <RouterView />
   </base-layout>
 </template>

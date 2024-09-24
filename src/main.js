@@ -1,6 +1,10 @@
 import "bootstrap/dist/css/bootstrap.css"
 import './assets/dashboard.css'
 import './assets/form-styles.css'
+import './assets/notify.scss'
+import './assets/loading.css';
+
+import {LoadingPlugin} from 'vue-loading-overlay';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBook, faPerson, faList, faHouse, faFileImport } from '@fortawesome/free-solid-svg-icons';
@@ -36,6 +40,7 @@ app.use(createPinia())
 app.use(router)
 app.use(Notifications)
 app.use(VueAxios, axios)
+app.use(LoadingPlugin);
 
 app.mount('#app')
 import "bootstrap/dist/js/bootstrap.js"

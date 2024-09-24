@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     
-    <form @submit.prevent="logar" ref="formLogar" method="post" action="salvar">
+    <form @submit.prevent="submitForm" ref="formLogar" method="post" action="salvar">
       <div class="card">
         <h5 class="card-header bg-secondary text-white">Cadastrar assunto</h5>
         <div class="card-body">
@@ -19,17 +19,17 @@
 
       <div class="mt-4">
           <button type="submit" @click="submitForm" class="btn btn-primary float-end">salvar</button>
-          <router-link to="/assunto" class="btn btn-info float-end me-2">
-            Voltar
-          </router-link>
+          <a href="/assunto" type="button" class="btn btn-info float-end me-2">Voltar</a>
       </div>
   </form>
   </div>
 </template>
 <script>
+import router from "@/router";
 import useVuelidate from "@vuelidate/core";
 import { required, maxLength, sameAs, email, helpers } from "@vuelidate/validators";
 import { reactive, computed } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
   name: "CadastrarAssuntoPage",
@@ -47,15 +47,14 @@ export default {
         },
       };
     })
-
     const v$ = useVuelidate(rules, state);
 
-    return { state, v$, }
+    return { state, v$, router}
       
   },
   data() {
     return {
-      msgSistema: '',
+      fullPage: false
     }
   },
   validations() {
@@ -69,33 +68,51 @@ export default {
    async submitForm() {
       
       this.v$.$validate();
-
+      
       if(!this.v$.$error){
 
+        const loader = this.$loading.show();
+        
         const response = await this.axios.post('/assunto/salvar', {
           descricao: this.state.descricao,
         })
         .then(function (response) {
-          console.log(response);
-
-          if(this.checkIsUndefined(response)){
+          loader.hide();
           if(response.data.type == 'SUCESSO'){
-            alert(response.data.mensagem);
-            this.$router.push('/')
+            notify({
+              title: 'Mensagem',
+              text: response.data.mensagem,
+              type: 'success',
+              position: 'top right',
+              duration: 10000,
+            })
+            
+            router.push({ path: '/assunto' })
           }
-        }
+          
         })
         .catch(function (error) {
           console.log(error);
+          loader.hide();
           if(error.response.data.type == 'ERROR'){
-              this.msgSistema = error.response.data.mensagem;
-              this.tipoMsgSistema = 'alert-danger';
+              notify({
+              title: 'Mensagem',
+              text: response.data.mensagem,
+              type: 'error',
+              position: 'top right',
+            })
+
             }
         });
-
+          
       }
       
+    },
+    limpaForm(){
+      console.log('limpa form')
+      this.state.descricao = '';
     }
   },
+
 };
 </script>

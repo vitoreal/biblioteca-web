@@ -22,13 +22,15 @@
   </div>
 </template>
 <script>
+
+import { notify } from "@kyvg/vue3-notification";
+
 export default {
   
   data() {
     return {
         listaAssunto: [],
         page: 1,
-        limit: 25,
     }    
   },
   async mounted(){
@@ -36,11 +38,14 @@ export default {
   },
   methods: {
     async getAssuntos(){
-      await this.axios.get('assunto/salvar').then(res => {
+
+      const urlFetch = 'assunto/listar/'+this.page;
+
+      await this.axios.get(urlFetch).then(res => {
         this.listaAssunto = res.data
+        console.log(this.listaAssunto.lista);
       }).catch((error) => {
-        this.$notify({
-          group: 'foo',
+        notify({
           title: 'Mensagem',
           text: error.response.data.mensagem,
           type: 'error',
