@@ -110,17 +110,17 @@ export default {
     },
     async getDado(){
 
-        const loader = this.$loading.show();
-        const urlFetch = 'assunto/buscar/'+this.$route.params.id;
+      const loader = this.$loading.show();
+      const urlFetch = 'assunto/buscar/'+this.$route.params.id;
 
       await this.axios.get(urlFetch).then(res => {
         loader.hide();
-        const dados = response.data.result;
-        this.state.descricao = dados.descricao;     
+        this.state.descricao = res.data.result.descricao;
       }).catch((error) => {
+        console.log(error)
         notify({
           title: 'Mensagem',
-          text: error.response.data.mensagem,
+          //text: error.response.data.mensagem,
           type: 'error',
           position: 'top right',
         })

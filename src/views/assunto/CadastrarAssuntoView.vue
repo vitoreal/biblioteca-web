@@ -33,7 +33,6 @@ import { notify } from "@kyvg/vue3-notification";
 
 export default {
   name: "CadastrarAssuntoPage",
-  props: ["errorLogin"],
   setup() {
     const state = reactive({
       descricao: "",
