@@ -52,6 +52,7 @@
 <script>
 import { isProxy, ref, toRaw } from 'vue';
 import { notify } from "@kyvg/vue3-notification";
+import utils from '../../../src/composables/Utils';
 
 export default {
   name: "ListarAssunto",
@@ -100,7 +101,7 @@ export default {
       
     },
     async excluir(id){
-
+      
       const loader = this.$loading.show();
       const response = await this.axios.post('/assunto/excluir', {
          id: id,
@@ -109,8 +110,6 @@ export default {
           loader.hide();
           if(response.data.type == 'SUCESSO'){
 
-            this.myCallback();
-
             notify({
               title: 'Mensagem',
               text: response.data.mensagem,
@@ -118,7 +117,6 @@ export default {
               position: 'top right',
               duration: 10000,
             })
-            
           }
           
         })
@@ -136,8 +134,8 @@ export default {
             }
         });
 
-
-      }
+        this.getAssuntos();
+    }
   },
 }
   
