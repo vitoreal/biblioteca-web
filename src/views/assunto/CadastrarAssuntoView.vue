@@ -103,7 +103,7 @@ export default {
           if(error.response.data.type == 'ERROR'){
               notify({
               title: 'Mensagem',
-              text: response.data.mensagem,
+              text: error.response.data.mensagem,
               type: 'error',
               position: 'top right',
             })

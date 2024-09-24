@@ -127,7 +127,7 @@ export default {
         console.log(error)
         notify({
           title: 'Mensagem',
-          //text: error.response.data.mensagem,
+          text: error.response.data.mensagem,
           type: 'error',
           position: 'top right',
         })

@@ -3,14 +3,14 @@
     
     <form @submit.prevent ref="formLogar" method="post" action="salvar">
       <div class="card">
-        <h5 class="card-header bg-secondary text-white">Editar assunto</h5>
+        <h5 class="card-header bg-secondary text-white">Cadastrar autor</h5>
         <div class="card-body">
 
           <div class="row mb-3">
-            <label for="descricao" class="col-auto col-form-label">Descrição:</label>
+            <label for="nome" class="col-auto col-form-label">Nome:</label>
             <div class="col-sm-4">
-              <input v-model="state.descricao"  type="text" maxlength="20" class="form-control" id="descricao">
-              <label class="error" v-if="v$.descricao.$error">{{ v$.descricao.$errors[0].$message }}</label>
+              <input v-model="state.nome"  type="text" maxlength="40" class="form-control" id="nome">
+              <label class="error" v-if="v$.nome.$error">{{ v$.nome.$errors[0].$message }}</label>
             </div>
           </div>
 
@@ -32,17 +32,16 @@ import { reactive, computed } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 
 export default {
-  name: "EditarAssuntoView",
   setup() {
     const state = reactive({
-      descricao: "",
+      nome: "",
     })
 
    // const router = 
     const rules = computed(() => {
       return { 
-        descricao: {
-            required: helpers.withMessage("Campo descrição é obrigatório!", required),
+        nome: {
+            required: helpers.withMessage("Campo nome é obrigatório!", required),
         },
       };
     })
@@ -58,7 +57,7 @@ export default {
   },
   validations() {
     return {
-      descricao: { 
+      nome: { 
         required
       },
     };
@@ -72,9 +71,8 @@ export default {
 
         const loader = this.$loading.show();
         
-        const response = await this.axios.post('/assunto/salvar', {
-          id: this.$route.params.id,
-          descricao: this.state.descricao,
+        const response = await this.axios.post('/autor/salvar', {
+          nome: this.state.nome,
         })
         .then(function (response) {
           loader.hide();
@@ -87,7 +85,7 @@ export default {
               duration: 10000,
             })
             
-            router.push({ path: '/assunto' })
+            router.push({ path: '/autor' })
           } else {
             notify({
               title: 'Mensagem',
@@ -101,11 +99,11 @@ export default {
         .catch(function (error) {
           console.log(error);
           loader.hide();
-          if(error.response.data.type != 'SUCESSO'){
+          if(error.response.data.type == 'ERROR'){
               notify({
               title: 'Mensagem',
               text: error.response.data.mensagem,
-              type: 'warn',
+              type: 'error',
               position: 'top right',
             })
 
@@ -115,28 +113,10 @@ export default {
       }
       
     },
-    async getDado(){
-
-      const loader = this.$loading.show();
-      const urlFetch = 'assunto/buscar/'+this.$route.params.id;
-
-      await this.axios.get(urlFetch).then(res => {
-        loader.hide();
-        this.state.descricao = res.data.result.descricao;
-      }).catch((error) => {
-        console.log(error)
-        notify({
-          title: 'Mensagem',
-          //text: error.response.data.mensagem,
-          type: 'error',
-          position: 'top right',
-        })
-      });
-
+    limpaForm(){
+      this.state.nome = '';
     }
   },
-  mounted() {
-    this.getDado();
-  }
+
 };
 </script>
