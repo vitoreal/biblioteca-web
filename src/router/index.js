@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ListarAssuntoView from '../views/assunto/ListarAssuntoView.vue'
-import CadastrarAssuntoView from '../views/assunto/CadastrarAssuntoView.vue'
+
 
 import AutorView from '../views/AutorView.vue'
 import LivrosView from '../views/LivrosView.vue'
+
+// Assunto
+import ListarAssuntoView from '../views/assunto/ListarAssuntoView.vue'
+import CadastrarAssuntoView from '../views/assunto/CadastrarAssuntoView.vue'
+import EditarAssuntoView from '@/views/assunto/EditarAssuntoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,8 +30,9 @@ const router = createRouter({
     },
     { path: '/assunto', name: 'AssuntoPage',
       children: [
-        { path: '', name: 'ListarAssuntoPage', component: ListarAssuntoView, },
-        { path: 'cadastrar', name: 'CadastrarAssuntoPage', component: CadastrarAssuntoView, },
+        { path: '', name: 'ListarAssuntoView', component: ListarAssuntoView, },
+        { path: 'cadastrar', name: 'CadastrarAssuntoView', component: CadastrarAssuntoView, },
+        { path: 'editar/:id', name: 'EditarAssuntoView', component: EditarAssuntoView, },
       ]
     },
   ]
