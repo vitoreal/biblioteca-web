@@ -18,7 +18,15 @@
             <label for="editora" class="col-auto col-form-label">Editora:</label>
             <div class="col-sm-5">
               <input v-model="state.editora" type="text" maxlength="40" class="form-control" id="editora">
-              <label class="error" v-if="v$.titulo.$error">{{ v$.editora.$errors[0].$message }}</label>
+              <label class="error" v-if="v$.editora.$error">{{ v$.editora.$errors[0].$message }}</label>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="edicao" class="col-auto col-form-label">Edição:</label>
+            <div class="col-sm-5">
+              <input v-model="state.edicao" type="text" maxlength="40" class="form-control" id="edicao">
+              <label class="error" v-if="v$.edicao.$error">{{ v$.edicao.$errors[0].$message }}</label>
             </div>
           </div>
 
@@ -172,9 +180,15 @@ export default {
       if(!this.v$.$error){
 
         const loader = this.$loading.show();
-        
-        const response = await this.axios.post('/assunto/salvar', {
-          descricao: this.state.descricao,
+
+        const response = await this.axios.post('/livro/salvar', {
+          titulo: this.state.titulo,
+          editora: this.state.editora,
+          edicao: this.state.edicao,
+          anoPublicacao: this.state.anoPublicacao,
+          valor: this.state.valor,
+          assunto: this.state.assunto,
+          autor: this.state.autor,
         })
         .then(function (response) {
           loader.hide();
@@ -213,7 +227,7 @@ export default {
         });
           
       }
-      
+      console.log(this.v$)
     },
    
     async getListaAutor(){
