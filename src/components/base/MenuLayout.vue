@@ -9,7 +9,7 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/livros" class="nav-link" aria-current="page" >
+          <RouterLink to="/livro" class="nav-link" aria-current="page" >
             <font-awesome-icon icon="book" size="lg" />
             Livros
           </RouterLink>

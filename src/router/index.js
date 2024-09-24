@@ -11,6 +11,11 @@ import ListarAutorView from '@/views/autor/ListarAutorView.vue'
 import CadastrarAutorView from '@/views/autor/CadastrarAutorView.vue'
 import EditarAutorView from '@/views/autor/EditarAutorView.vue'
 
+// Livro
+import ListarLivroView from '@/views/livros/ListarLivroView.vue'
+import CadastrarLivroView from '@/views/livros/CadastrarLivroView.vue'
+import EditarLivroView from '@/views/livros/EditarLivroView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,10 +24,12 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    {
-      path: '/livros',
-      name: 'livros',
-     // component: LivrosView
+    { path: '/livro', name: 'LivroPage',
+      children: [
+        { path: '', name: 'ListarLivroView', component: ListarLivroView, },
+        { path: 'cadastrar', name: 'CadastrarLivroView', component: CadastrarLivroView, },
+        { path: 'editar/:id', name: 'EditarLivroView', component: EditarLivroView, },
+      ]
     },
     { path: '/autor', name: 'AutorPage',
       children: [

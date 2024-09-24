@@ -13,7 +13,7 @@ import Notifications from '@kyvg/vue3-notification'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomePaginate from "vue-awesome-paginate";
-import "vue-awesome-paginate/dist/style.css";
+import money from 'v-money3'
 
 import './axios'; // axios.js - responsavel por setar a url da api
 
@@ -41,6 +41,7 @@ app.use(Notifications)
 app.use(VueAxios, axios)
 app.use(LoadingPlugin);
 app.use(VueAwesomePaginate);
+app.use(money)
 
 app.mount('#app')
 import "bootstrap/dist/js/bootstrap.js"
