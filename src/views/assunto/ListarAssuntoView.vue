@@ -11,9 +11,21 @@
         Assunto
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <div v-if="listaAssunto && listaAssunto.total > 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Descrição</th>
+            </tr>
+          </thead>
+          <tbody v-if="listaAssunto != null && listaAssunto.total > 0">
+            <tr v-for="(item, index) in listaAssunto.lista" :key="index">
+              <th scope="row">{{ item.id }}</th>
+              <td>{{ item.descricao }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div v-if="listaAssunto != null && listaAssunto.total > 0">
           <pagination v-model="page" :records="listaAssunto.total" :per-page="limit" @paginate="myCallback"/>
         </div> 
       </div>
@@ -22,15 +34,17 @@
   </div>
 </template>
 <script>
-
+import { isProxy, ref, toRaw } from 'vue';
 import { notify } from "@kyvg/vue3-notification";
 
 export default {
-  
+  name: "ListarAssunto",
   data() {
     return {
-        listaAssunto: [],
+        listaAssunto: null,
         page: 1,
+        limit: 10,
+        skip: 0
     }    
   },
   async mounted(){
@@ -39,11 +53,17 @@ export default {
   methods: {
     async getAssuntos(){
 
-      const urlFetch = 'assunto/listar/'+this.page;
+      const urlFetch = 'assunto/listar/'+this.skip+'/'+this.limit;
 
       await this.axios.get(urlFetch).then(res => {
-        this.listaAssunto = res.data
-        console.log(this.listaAssunto.lista);
+       
+        this.listaAssunto = res.data.lista
+
+        if (isProxy(this.listaAssunto)){
+          this.listaAssunto = toRaw(this.listaAssunto)
+        }
+
+        console.log(this.listaAssunto);        
       }).catch((error) => {
         notify({
           title: 'Mensagem',
@@ -52,6 +72,10 @@ export default {
           position: 'top right',
         })
       });
+    },
+    myCallback() {
+        this.skip = (this.page*this.limit) - this.limit;
+        this.getAssuntos();
     }
   },
 }
