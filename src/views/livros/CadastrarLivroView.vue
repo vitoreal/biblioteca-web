@@ -33,8 +33,8 @@
           <div class="row mb-3">
             <label for="anoPublicacao" class="col-auto col-form-label">Ano de publicação:</label>
             <div class="col-sm-5">
-              <MaskInput v-model="state.anoPublicacao" mask="####" class="form-control" />
-              <label class="error" v-if="v$.anoPublicacao.$error">{{ v$.anoPublicacao.$errors[0].$message }}</label>
+              <input v-model="state.anoPublicacao"  v-mask="'0000'" type="text" class="form-control" id="anoPublicacao">
+             <label class="error" v-if="v$.anoPublicacao.$error">{{ v$.anoPublicacao.$errors[0].$message }}</label>
             </div>
           </div>
           <div class="row mb-3">
@@ -81,8 +81,6 @@ import useVuelidate from "@vuelidate/core";
 import { required, numeric, helpers } from "@vuelidate/validators";
 import { reactive, computed } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import { Money3Directive } from 'v-money3'
-import { MaskInput } from 'vue-3-mask';
 
 export default {
   name: "CadastrarLivrosPage",
@@ -142,10 +140,6 @@ export default {
         precision: 2,
         }
     }
-  },
-  directives: { money3: Money3Directive },
-  components: {
-    MaskInput,
   },
   validations() {
     return {

@@ -15,6 +15,7 @@ import VueAxios from 'vue-axios'
 import VueAwesomePaginate from "vue-awesome-paginate";
 import money from 'v-money3'
 import "vue-awesome-paginate/dist/style.css";
+import VueMask from '@devindex/vue-mask';
 
 import './axios'; // axios.js - responsavel por setar a url da api
 
@@ -43,6 +44,6 @@ app.use(VueAxios, axios)
 app.use(LoadingPlugin);
 app.use(VueAwesomePaginate);
 app.use(money)
-
+app.use(VueMask);
 app.mount('#app')
 import "bootstrap/dist/js/bootstrap.js"

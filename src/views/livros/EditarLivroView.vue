@@ -33,7 +33,7 @@
           <div class="row mb-3">
             <label for="anoPublicacao" class="col-auto col-form-label">Ano de publicação:</label>
             <div class="col-sm-5">
-              <MaskInput v-model="state.anoPublicacao" mask="####" class="form-control" />
+              <input v-model="state.anoPublicacao"  v-mask="'0000'" type="text" class="form-control" id="anoPublicacao">
               <label class="error" v-if="v$.anoPublicacao.$error">{{ v$.anoPublicacao.$errors[0].$message }}</label>
             </div>
           </div>
@@ -81,11 +81,9 @@ import useVuelidate from "@vuelidate/core";
 import { required, numeric, helpers } from "@vuelidate/validators";
 import { reactive, computed } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import { Money3Directive } from 'v-money3'
-import { MaskInput } from 'vue-3-mask';
 
 export default {
-  name: "CadastrarLivrosPage",
+  name: "EditarLivrosPage",
   setup() {
     const state = reactive({
       titulo: "",
@@ -143,10 +141,6 @@ export default {
         }
     }
   },
-  directives: { money3: Money3Directive },
-  components: {
-    MaskInput,
-  },
   validations() {
     return {
       titulo: { 
@@ -191,7 +185,6 @@ export default {
           autor: this.state.autor,
         })
         .then(function (response) {
-          
           if(response.data.type == 'SUCESSO'){
             notify({
               title: 'Mensagem',
@@ -210,11 +203,11 @@ export default {
               position: 'top right',
             })
           }
-          loader.hide();
+          
         })
         .catch(function (error) {
           console.log(error);
-          loader.hide();
+          
           if(error.response.data.type == 'ERROR'){
               notify({
               title: 'Mensagem',
@@ -225,9 +218,8 @@ export default {
 
             }
         });
-          
+        loader.hide();
       }
-      console.log(this.v$)
     },
    
     async getListaAutor(){
@@ -257,6 +249,30 @@ export default {
       
      this.state.listaAssunto = response.data.lista
     },
+    async getDado(){
+
+      const urlFetch = 'livro/buscar/'+this.$route.params.id;
+
+      await this.axios.get(urlFetch).then(res => {
+        this.state.titulo = res.data.result.titulo;
+        this.state.editora = res.data.result.editora;
+        this.state.edicao = res.data.result.edicao;
+        this.state.anoPublicacao = res.data.result.ano_publicacao;
+        this.state.valor = res.data.result.valor;
+        this.state.assunto = res.data.result.assunto;
+        this.state.autor = res.data.result.autor;
+       
+      }).catch((error) => {
+        console.log(error)
+        notify({
+          title: 'Mensagem',
+          text: error.response.data.mensagem,
+          type: 'error',
+          position: 'top right',
+        })
+      });
+
+    },
     limpaForm(){
       this.state.descricao = '';
     }
@@ -265,6 +281,7 @@ export default {
     const loader = this.$loading.show();
       await this.getListaAutor();
       await this.getListaAssunto();
+      await this.getDado();
       loader.hide();
   },
 
