@@ -201,7 +201,7 @@ export default {
               duration: 10000,
             })
             
-            router.push({ path: '/assunto' })
+            router.push({ path: '/livro' })
           } else {
             notify({
               title: 'Mensagem',

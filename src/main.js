@@ -14,6 +14,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomePaginate from "vue-awesome-paginate";
 import money from 'v-money3'
+import "vue-awesome-paginate/dist/style.css";
 
 import './axios'; // axios.js - responsavel por setar a url da api
 

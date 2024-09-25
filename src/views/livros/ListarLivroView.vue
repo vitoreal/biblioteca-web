@@ -7,7 +7,7 @@
     </div>
     
     <div class="card">
-      <h5 class="card-header bg-secondary text-white">Assunto</h5>
+      <h5 class="card-header bg-secondary text-white">Livros</h5>
       <div class="card-body">
         <table class="table table-hover table-bordered">
           <thead>
@@ -23,8 +23,12 @@
           </thead>
           <tbody v-if="listaTodos != null && listaTodos.total > 0">
             <tr v-for="(item, index) in listaTodos.lista" :key="index">
-              <th scope="row">{{ item.id }}</th>
-              <td>{{ item.descricao }}</td>
+              <td>{{ item.titulo }}</td>
+              <td>{{ item.editora }}</td>
+              <td>{{ item.edicao }}</td>
+              <td>{{ item.ano_publicacao }}</td>
+              <td>{{ item.ano_publicacao }}</td>
+              <td>{{ item.ano_publicacao }}</td>
               <td class="alinhaCenter" style="width: 10%;">
                 
                 <RouterLink :to="'/assunto/editar/'+item.id" class="me-2">
@@ -113,7 +117,7 @@ export default {
     async excluir(id){
       
       const loader = this.$loading.show();
-      const response = await this.axios.post('/assunto/excluir', {
+      const response = await this.axios.post('/livro/excluir', {
          id: id,
         })
         .then(function (response) {
