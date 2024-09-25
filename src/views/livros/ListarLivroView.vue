@@ -1,7 +1,8 @@
 <template>
   <div class="row">
     <div class="mb-4">
-        <router-link to="livro/cadastrar" class="btn btn-primary float-end">
+        <button type="button" @click="submitForm" class="btn btn-info float-end">Gerar Relatório</button>
+        <router-link to="livro/cadastrar" class="btn btn-primary float-end me-2">
           Cadastrar
         </router-link>
     </div>
@@ -56,7 +57,7 @@
           </tbody>
           <tbody v-if="listaTodos == null || listaTodos.total == 0">
             <tr>
-              <td class="alinhaCenter" colspan="3">
+              <td class="alinhaCenter" colspan="7">
                 Nenhum resultado encontrado!
               </td>
             </tr>
