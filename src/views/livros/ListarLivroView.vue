@@ -27,8 +27,20 @@
               <td>{{ item.editora }}</td>
               <td>{{ item.edicao }}</td>
               <td>{{ item.ano_publicacao }}</td>
-              <td>{{ item.ano_publicacao }}</td>
-              <td>{{ item.ano_publicacao }}</td>
+              <td>
+                <ul>
+                  <li v-for="value in item.assuntos">
+                    {{ value.descricao }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li v-for="value in item.autores">
+                    {{ value.nome }}
+                  </li>
+                </ul>
+              </td>
               <td class="alinhaCenter" style="width: 10%;">
                 
                 <RouterLink :to="'/assunto/editar/'+item.id" class="me-2">
