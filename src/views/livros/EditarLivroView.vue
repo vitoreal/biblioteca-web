@@ -176,6 +176,7 @@ export default {
         const loader = this.$loading.show();
 
         const response = await this.axios.post('/livro/salvar', {
+          id: this.$route.params.id,
           titulo: this.state.titulo,
           editora: this.state.editora,
           edicao: this.state.edicao,
@@ -259,8 +260,8 @@ export default {
         this.state.edicao = res.data.result.edicao;
         this.state.anoPublicacao = res.data.result.ano_publicacao;
         this.state.valor = res.data.result.valor;
-        this.state.assunto = res.data.result.assunto;
-        this.state.autor = res.data.result.autor;
+        this.state.assunto = res.data.result.assuntos;
+        this.state.autor = res.data.result.autores;
        
       }).catch((error) => {
         console.log(error)
