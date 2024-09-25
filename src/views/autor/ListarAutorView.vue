@@ -59,7 +59,6 @@
 <script>
 import { isProxy, ref, toRaw } from 'vue';
 import { notify } from "@kyvg/vue3-notification";
-import utils from '../../../src/composables/Utils';
 
 export default {
   name: "listaAutor",

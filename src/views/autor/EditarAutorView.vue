@@ -77,7 +77,7 @@ export default {
           nome: this.state.nome,
         })
         .then(function (response) {
-          loader.hide();
+          
           if(response.data.type == 'SUCESSO'){
             notify({
               title: 'Mensagem',
@@ -96,11 +96,11 @@ export default {
               position: 'top right',
             })
           }
-          
+          loader.hide();
         })
         .catch(function (error) {
           console.log(error);
-          loader.hide();
+          
           if(error.response.data.type != 'SUCESSO'){
               notify({
               title: 'Mensagem',

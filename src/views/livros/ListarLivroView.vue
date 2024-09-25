@@ -43,7 +43,7 @@
               </td>
               <td class="alinhaCenter" style="width: 10%;">
                 
-                <RouterLink :to="'/assunto/editar/'+item.id" class="me-2">
+                <RouterLink :to="'/livro/editar/'+item.id" class="me-2">
                   <font-awesome-icon icon="pen-to-square" size="lg"  class="iconeEditar" />
                 </RouterLink>
                 
@@ -97,7 +97,7 @@ export default {
     async getLista(){
 
       const urlFetch = 'livro/listar/'+this.skip+'/'+this.limit;
-
+      const loader = this.$loading.show();
       await this.axios.get(urlFetch).then(res => {
         
         this.listaTodos = res.data.lista
@@ -114,6 +114,8 @@ export default {
           position: 'top right',
         })
       });
+
+      loader.hide();
     },
     myCallback() {
         this.skip = (this.currentPage*this.limit) - this.limit;

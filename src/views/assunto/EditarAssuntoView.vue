@@ -77,7 +77,6 @@ export default {
           descricao: this.state.descricao,
         })
         .then(function (response) {
-          loader.hide();
           if(response.data.type == 'SUCESSO'){
             notify({
               title: 'Mensagem',
@@ -100,7 +99,6 @@ export default {
         })
         .catch(function (error) {
           console.log(error);
-          loader.hide();
           if(error.response.data.type != 'SUCESSO'){
               notify({
               title: 'Mensagem',
@@ -111,7 +109,7 @@ export default {
 
             }
         });
-          
+        loader.hide();
       }
       
     },
@@ -119,20 +117,19 @@ export default {
 
       const loader = this.$loading.show();
       const urlFetch = 'assunto/buscar/'+this.$route.params.id;
-
       await this.axios.get(urlFetch).then(res => {
-        loader.hide();
+        
         this.state.descricao = res.data.result.descricao;
       }).catch((error) => {
         console.log(error)
         notify({
           title: 'Mensagem',
-          //text: error.response.data.mensagem,
+          text: error.response.data.mensagem,
           type: 'error',
           position: 'top right',
         })
       });
-
+      loader.hide();
     }
   },
   mounted() {
