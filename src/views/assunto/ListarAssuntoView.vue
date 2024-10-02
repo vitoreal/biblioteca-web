@@ -87,12 +87,14 @@ export default {
         }
 
       }).catch((error) => {
-        notify({
-          title: 'Mensagem',
-          text: error.response.data.mensagem,
-          type: 'error',
-          position: 'top right',
-        })
+        if(error.response){
+          notify({
+            title: 'Mensagem',
+            text: error.response.data.mensagem,
+            type: 'error',
+            position: 'top right',
+          })
+        }
       });
     },
     myCallback() {

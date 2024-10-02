@@ -227,29 +227,36 @@ export default {
     async getListaAutor(){
       
       const response = await this.axios.get('autor/listar-autor').catch((error) => {
-        notify({
-          title: 'Mensagem',
-          text: error.response.data.mensagem,
-          type: 'warn',
-          position: 'top right',
-        })
+        if(error.response){
+          notify({
+            title: 'Mensagem',
+            text: error.response.data.mensagem,
+            type: 'warn',
+            position: 'top right',
+          })
+        }
       });
-
-     this.state.listaAutor = response.data.lista
-
+      if(response){
+        this.state.listaAutor = response.data.lista
+      }
+     
     },
     async getListaAssunto(){
       
       const response = await this.axios.get('assunto/listar-assunto').catch((error) => {
-        notify({
-          title: 'Mensagem',
-          text: error.response.data.mensagem,
-          type: 'warn',
-          position: 'top right',
-        })
+        if(error.response){
+          notify({
+            title: 'Mensagem',
+            text: error.response.data.mensagem,
+            type: 'warn',
+            position: 'top right',
+          })
+        }
       });
       
-     this.state.listaAssunto = response.data.lista
+     if(response){
+        this.state.listaAssunto = response.data.lista
+      }
     },
     limpaForm(){
       this.state.descricao = '';
